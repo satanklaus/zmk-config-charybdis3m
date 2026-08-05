@@ -10,5 +10,9 @@ manifest:
     - name: zmk
       remote: zmkfirmware
       import: app/west.yml
+    - name: zmk-keyboard-charybdis3m
+      url: https://github.com/satanklaus/zmk-keyboard-charybdis3m
+      revision: main
+      path: modules/zmk-keyboard-charybdis3m
   self:
     path: config
