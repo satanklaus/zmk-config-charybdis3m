@@ -19,9 +19,9 @@
 #
 ---
 include:
-  - board: promicro_nrf52840
+  - board: nrf21540dk_nrf52840
     shield: charybdis3m_left
-  - board: promicro_nrf52840
+  - board: nrf21540dk_nrf52840
     shield: charybdis3m_right
-  - board: promicro_nrf52840
+  - board: nrf21540dk_nrf52840
     shield: settings_reset
