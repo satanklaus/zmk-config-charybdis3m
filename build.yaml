@@ -19,9 +19,9 @@
 #
 ---
 include:
-  - board: nrf21540dk_nrf52840
+  - board: nice_nano_v2
     shield: charybdis3m_left
-  - board: nrf21540dk_nrf52840
+  - board: nice_nano_v2
     shield: charybdis3m_right
-  - board: nrf21540dk_nrf52840
+  - board: nice_nano_v2
     shield: settings_reset
