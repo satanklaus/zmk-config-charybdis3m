@@ -1,2 +1,6 @@
 
-.zmk/
+.west/
+modules/
+venv/
+zmk/
+modules/
