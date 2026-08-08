@@ -18,3 +18,4 @@ INSTALLATION
 
 TODO
     * auto find zephyr sdk?
+    * SDK install guide
