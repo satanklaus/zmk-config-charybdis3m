@@ -1,8 +1,27 @@
 #include <behaviors.dtsi>
+#include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
+
+/ {
+    behaviors {
+        /* Pushbutton on the dongle's P1.15 (zmk-behavior-pushbutton module).
+         * Kept here, not in the keyboard shield, so a stock build has no
+         * pushbutton. Okay on every board so &pb resolves in the keymap; the
+         * module builds the driver only on the central, so the halves never
+         * drive the pin (P1.15 is a matrix pin there). */
+        pb: pushbutton {
+            compatible = "zmk,behavior-pushbutton";
+            display-name = "Push Button";
+            #binding-cells = <0>;
+            gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+            press-duration-ms = <200>;
+            status = "okay";
+        };
+    };
+};
 
 &lt {
     tapping-term-ms = <200>;
