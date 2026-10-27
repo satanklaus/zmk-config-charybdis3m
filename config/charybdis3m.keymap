@@ -65,6 +65,7 @@
         compatible = "zmk,keymap";
 
         main {
+            display-name = "main";
             bindings = <
 &kp ESC         &kp N1              &kp N2          &kp N3            &kp N4     &kp N5           &kp N6         &kp N7     &kp N8            &kp N9          &kp N0                      &kp MINUS
 &kp TAB         &kp Q               &kp W           &kp E             &kp R      &kp T            &kp Y          &kp U      &kp I             &kp O           &kp P                       &kp BSLH
@@ -76,6 +77,7 @@
         };
 
         Fn_Mouse {
+            display-name = "Fn_Mouse";
             bindings = <
 &trans  &kp F1   &kp F2   &kp F3  &kp F4  &kp F5    &kp F6          &kp F7          &kp F8     &kp F9     &kp F10  &kp PRINTSCREEN
 &trans  &kp F11  &kp F12  &trans  &trans  &trans    &kp LC(INSERT)  &kp LS(INSERT)  &trans     &trans     &trans   &trans
@@ -87,6 +89,7 @@
         };
 
         BT_layers {
+            display-name = "BT_layers";
             bindings = <
 &kp NUMBER_2  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans      &trans  &trans  &trans  &trans  &trans
 &trans        &trans          &trans        &trans        &trans        &trans          &trans      &trans  &trans  &trans  &trans  &trans
@@ -98,6 +101,7 @@
         };
 
         movements {
+            display-name = "movements";
             bindings = <
 &kp NUMBER_3  &trans  &trans  &trans  &trans  &trans    &trans          &trans          &trans         &trans           &trans  &trans
 &trans        &trans  &trans  &trans  &trans  &trans    &kp HOME        &kp PAGE_UP     &kp PAGE_DOWN  &kp END          &trans  &trans
@@ -109,6 +113,7 @@
         };
 
         supplements {
+            display-name = "supplements";
             bindings = <
 &kp TILDE  &trans  &trans  &trans  &trans  &trans       &kp PRINTSCREEN  &kp LEFT_BRACE     &kp RIGHT_BRACE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp EQUAL
 &trans     &trans  &trans  &trans  &trans  &kp GRAVE    &kp LC(INSERT)   &kp LS(INSERT)     &kp LA(INSERT)   &trans            &trans             &kp LS(EQUAL)
@@ -120,6 +125,7 @@
         };
 
         LAZY {
+            display-name = "LAZY";
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans    &trans          &trans     &trans     &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans          &trans     &trans     &trans  &trans  &trans
@@ -131,6 +137,7 @@
         };
 
         scrolly {
+            display-name = "scrolly";
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
@@ -142,8 +149,9 @@
         };
 
         Service {
+            display-name = "Service";
             bindings = <
-&pb    &none  &none  &none  &none  &none    &to 0  &to 8  &none  &none  &none  &none
+&pb    &studio_unlock  &none  &none  &none  &none    &to 0  &to 8  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
@@ -153,6 +161,7 @@
         };
 
         pure_typin {
+            display-name = "pure_typin";
             bindings = <
 &kp ESC         &kp N1  &kp N2  &kp N3        &kp N4     &kp N5           &kp N6         &kp N7     &kp N8     &kp N9   &kp N0         &kp MINUS
 &kp TAB         &kp Q   &kp W   &kp E         &kp R      &kp T            &kp Y          &kp U      &kp I      &kp O    &kp P          &kp BSLH
