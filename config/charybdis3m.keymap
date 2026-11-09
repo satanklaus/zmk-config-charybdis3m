@@ -1,6 +1,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pwm/pwm.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/buzzer.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
@@ -52,6 +54,43 @@
             display-name = "Haptic";
             #binding-cells = <1>;
             motor = <&haptic>;
+        };
+
+        /* Sound on the dongle (zmk-feedback-buzzer module); the parameter
+         * is the melody number in &buzzer below. */
+        beep: buzzer {
+            compatible = "zmk,behavior-buzzer";
+            display-name = "Buzzer";
+            #binding-cells = <1>;
+            buzzer = <&buzzer>;
+        };
+    };
+
+    /* Passive buzzer on the dongle's P0.02 (D19), PWM0 is routed there in
+     * charybdis3m_central.overlay. The halves never enable PWM0 or build the
+     * driver. Melodies are frequency/ms pairs, numbered from 0 in this order. */
+    buzzer: buzzer {
+        compatible = "zmk,buzzer";
+        pwms = <&pwm0 0 PWM_HZ(1000) PWM_POLARITY_NORMAL>;
+
+        beep { notes = <NOTE_A6 60>; };
+        startup: startup { notes = <NOTE_C6 70 NOTE_E6 70 NOTE_G6 70 NOTE_C7 140>; };
+        usb_up: usb_up { notes = <NOTE_G6 60 NOTE_C7 90>; };
+        usb_down: usb_down { notes = <NOTE_C7 60 NOTE_G6 90>; };
+        service_on: service_on { notes = <NOTE_E7 40 NOTE_REST 30 NOTE_E7 40>; };
+        service_off: service_off { notes = <NOTE_E6 80>; };
+    };
+
+    buzzer_triggers {
+        compatible = "zmk,buzzer-triggers";
+        startup = <&startup>;
+        usb-connected = <&usb_up>;
+        usb-disconnected = <&usb_down>;
+
+        service {
+            layer = <7>;
+            on = <&service_on>;
+            off = <&service_off>;
         };
     };
 

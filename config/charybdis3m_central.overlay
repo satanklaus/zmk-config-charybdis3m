@@ -1,0 +1,25 @@
+/* Dongle only: route PWM0 to the buzzer pin P0.02 (D19). Kept out of the
+ * keymap, which every board uses: on the halves this pin belongs to the
+ * matrix, and an enabled PWM0 would grab it. */
+
+&pinctrl {
+    pwm0_buzzer: pwm0_buzzer {
+        group1 {
+            psels = <NRF_PSEL(PWM_OUT0, 0, 2)>;
+        };
+    };
+
+    pwm0_buzzer_sleep: pwm0_buzzer_sleep {
+        group1 {
+            psels = <NRF_PSEL(PWM_OUT0, 0, 2)>;
+            low-power-enable;
+        };
+    };
+};
+
+&pwm0 {
+    status = "okay";
+    pinctrl-0 = <&pwm0_buzzer>;
+    pinctrl-1 = <&pwm0_buzzer_sleep>;
+    pinctrl-names = "default", "sleep";
+};
