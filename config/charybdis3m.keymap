@@ -12,13 +12,95 @@
          * pushbutton. Okay on every board so &pb resolves in the keymap; the
          * module builds the driver only on the central, so the halves never
          * drive the pin (P1.15 is a matrix pin there). */
-        pb: pushbutton {
+        kvm1: pushbutton1 {
             compatible = "zmk,behavior-pushbutton";
-            display-name = "Push Button";
+            display-name = "Push Button KVM1";
             #binding-cells = <0>;
             gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
             press-duration-ms = <200>;
             status = "okay";
+        };
+        kvm2: pushbutton2 {
+            compatible = "zmk,behavior-pushbutton";
+            display-name = "Push Button KVM2";
+            #binding-cells = <0>;
+            gpios = <&gpio1 13 GPIO_ACTIVE_HIGH>;
+            press-duration-ms = <200>;
+            status = "okay";
+        };
+        kvm3: pushbutton3 {
+            compatible = "zmk,behavior-pushbutton";
+            display-name = "Push Button KVM3";
+            #binding-cells = <0>;
+            gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>;
+            press-duration-ms = <200>;
+            status = "okay";
+        };
+        kvm4: pushbutton4 {
+            compatible = "zmk,behavior-pushbutton";
+            display-name = "Push Button KVM4";
+            #binding-cells = <0>;
+            gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
+            press-duration-ms = <500>;
+            status = "okay";
+        };
+
+        /* Vibration on the dongle (zmk-feedback-haptic module); the
+         * parameter is the pattern number in &haptic below. */
+        hap: haptic {
+            compatible = "zmk,behavior-haptic";
+            display-name = "Haptic";
+            #binding-cells = <1>;
+            motor = <&haptic>;
+        };
+    };
+
+    /* Vibration motor on the dongle's P0.09 (D10) through a MOSFET. Like the
+     * pushbuttons, the driver is only built on the central. Patterns are
+     * on/off ms, numbered from 0 in this order. */
+    haptic: haptic {
+        compatible = "zmk,haptic-motor";
+        gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+
+        one { timings-ms = <60>; };
+        two { timings-ms = <60 80 60>; };
+        three { timings-ms = <60 80 60 80 60>; };
+        long { timings-ms = <300>; };
+    };
+
+    macros {
+        /* KVM switch plus a buzz per target: 1, 2, 3 buzzes, long for KVM4 */
+        kvm1_hap: kvm1_hap {
+            compatible = "zmk,behavior-macro";
+            display-name = "KVM1 + buzz";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kvm1 &hap 0>;
+        };
+        kvm2_hap: kvm2_hap {
+            compatible = "zmk,behavior-macro";
+            display-name = "KVM2 + buzz";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kvm2 &hap 1>;
+        };
+        kvm3_hap: kvm3_hap {
+            compatible = "zmk,behavior-macro";
+            display-name = "KVM3 + buzz";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kvm3 &hap 2>;
+        };
+        kvm4_hap: kvm4_hap {
+            compatible = "zmk,behavior-macro";
+            display-name = "KVM4 + buzz";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings = <&macro_tap &kvm4 &hap 3>;
         };
     };
 };
@@ -170,7 +252,7 @@
         Service {
             display-name = "Service";
             bindings = <
-&pb    &studio_unlock  &none  &none  &none  &none    &to 0  &to 8  &none  &none  &none  &none
+&kvm1_hap  &kvm2_hap  &kvm3_hap  &kvm4_hap  &studio_unlock  &none    &to 0  &to 8  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
 &none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
