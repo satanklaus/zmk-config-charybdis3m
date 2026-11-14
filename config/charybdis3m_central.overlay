@@ -23,3 +23,11 @@
     pinctrl-1 = <&pwm0_buzzer_sleep>;
     pinctrl-names = "default", "sleep";
 };
+
+/* Dongle only: the vibration motor is on P0.09 (D10). P0.09/P0.10 are the
+ * NFC antenna pins by default, so release them as plain GPIOs (written to
+ * UICR on first boot, then the chip resets). The motor driver itself is
+ * limited to the central by the module's Kconfig. */
+&uicr {
+    nfct-pins-as-gpios;
+};

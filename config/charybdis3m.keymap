@@ -95,7 +95,8 @@
     };
 
     /* Vibration motor on the dongle's P0.09 (D10) through a MOSFET. Like the
-     * pushbuttons, the driver is only built on the central. Patterns are
+     * pushbuttons, the driver is only built on the central (module Kconfig;
+     * NFC pins freed in charybdis3m_central.overlay). Patterns are
      * on/off ms, numbered from 0 in this order. */
     haptic: haptic {
         compatible = "zmk,haptic-motor";
