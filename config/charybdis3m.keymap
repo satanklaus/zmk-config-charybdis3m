@@ -1,8 +1,8 @@
-#include <behaviors.dtsi>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/pwm/pwm.h>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/buzzer.h>
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
@@ -14,6 +14,7 @@
          * pushbutton. Okay on every board so &pb resolves in the keymap; the
          * module builds the driver only on the central, so the halves never
          * drive the pin (P1.15 is a matrix pin there). */
+
         kvm1: pushbutton1 {
             compatible = "zmk,behavior-pushbutton";
             display-name = "Push Button KVM1";
@@ -22,6 +23,7 @@
             press-duration-ms = <200>;
             status = "okay";
         };
+
         kvm2: pushbutton2 {
             compatible = "zmk,behavior-pushbutton";
             display-name = "Push Button KVM2";
@@ -30,6 +32,7 @@
             press-duration-ms = <200>;
             status = "okay";
         };
+
         kvm3: pushbutton3 {
             compatible = "zmk,behavior-pushbutton";
             display-name = "Push Button KVM3";
@@ -38,6 +41,7 @@
             press-duration-ms = <200>;
             status = "okay";
         };
+
         kvm4: pushbutton4 {
             compatible = "zmk,behavior-pushbutton";
             display-name = "Push Button KVM4";
@@ -49,6 +53,7 @@
 
         /* Vibration on the dongle (zmk-feedback-haptic module); the
          * parameter is the pattern number in &haptic below. */
+
         hap: haptic {
             compatible = "zmk,behavior-haptic";
             display-name = "Haptic";
@@ -58,6 +63,7 @@
 
         /* Sound on the dongle (zmk-feedback-buzzer module); the parameter
          * is the melody number in &buzzer below. */
+
         beep: buzzer {
             compatible = "zmk,behavior-buzzer";
             display-name = "Buzzer";
@@ -69,15 +75,21 @@
     /* Passive buzzer on the dongle's P0.02 (D19), PWM0 is routed there in
      * charybdis3m_central.overlay. The halves never enable PWM0 or build the
      * driver. Melodies are frequency/ms pairs, numbered from 0 in this order. */
+
     buzzer: buzzer {
         compatible = "zmk,buzzer";
         pwms = <&pwm0 0 PWM_HZ(1000) PWM_POLARITY_NORMAL>;
 
         beep { notes = <NOTE_A6 60>; };
+
         startup: startup { notes = <NOTE_C6 70 NOTE_E6 70 NOTE_G6 70 NOTE_C7 140>; };
+
         usb_up: usb_up { notes = <NOTE_G6 60 NOTE_C7 90>; };
+
         usb_down: usb_down { notes = <NOTE_C7 60 NOTE_G6 90>; };
+
         service_on: service_on { notes = <NOTE_E7 40 NOTE_REST 30 NOTE_E7 40>; };
+
         service_off: service_off { notes = <NOTE_E6 80>; };
     };
 
@@ -98,49 +110,57 @@
      * pushbuttons, the driver is only built on the central (module Kconfig;
      * NFC pins freed in charybdis3m_central.overlay). Patterns are
      * on/off ms, numbered from 0 in this order. */
+
     haptic: haptic {
         compatible = "zmk,haptic-motor";
         gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
 
         one { timings-ms = <60>; };
+
         two { timings-ms = <60 80 60>; };
+
         three { timings-ms = <60 80 60 80 60>; };
+
         long { timings-ms = <300>; };
     };
 
     macros {
         /* KVM switch plus a buzz per target: 1, 2, 3 buzzes, long for KVM4 */
+
         kvm1_hap: kvm1_hap {
             compatible = "zmk,behavior-macro";
             display-name = "KVM1 + buzz";
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kvm1 &hap 0>;
+            bindings = <&macro_tap>, <&kvm1 &hap 0>;
         };
+
         kvm2_hap: kvm2_hap {
             compatible = "zmk,behavior-macro";
             display-name = "KVM2 + buzz";
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kvm2 &hap 1>;
+            bindings = <&macro_tap>, <&kvm2 &hap 1>;
         };
+
         kvm3_hap: kvm3_hap {
             compatible = "zmk,behavior-macro";
             display-name = "KVM3 + buzz";
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kvm3 &hap 2>;
+            bindings = <&macro_tap>, <&kvm3 &hap 2>;
         };
+
         kvm4_hap: kvm4_hap {
             compatible = "zmk,behavior-macro";
             display-name = "KVM4 + buzz";
             #binding-cells = <0>;
             wait-ms = <0>;
             tap-ms = <0>;
-            bindings = <&macro_tap &kvm4 &hap 3>;
+            bindings = <&macro_tap>, <&kvm4 &hap 3>;
         };
     };
 };
@@ -213,7 +233,7 @@
 &kp LEFT_WIN    &mt LEFT_CONTROL A  &mt LEFT_ALT S  &mt LEFT_SHIFT D  &lt 4 F    &lt 1 G          &lt 1 H        &lt 4 J    &mt LEFT_SHIFT K  &mt LEFT_ALT L  &mt LEFT_CONTROL SEMICOLON  &mt LEFT_WIN SQT
 &kp LEFT_SHIFT  &kp Z               &kp X           &kp C             &kp V      &lt 2 B          &kp N          &kp M      &kp COMMA         &kp DOT         &kp FSLH                    &kp RIGHT_SHIFT
                                                     &kp LEFT_WIN      &kp SPACE  &kp BACKSPACE    &kp ENTER      &kp SPACE
-                                                                      &mo 3      &to 7            &kp BACKSPACE
+                                                                      &mo 3      &mo 7            &kp BACKSPACE
             >;
         };
 
@@ -292,12 +312,12 @@
         Service {
             display-name = "Service";
             bindings = <
-&kvm1_hap  &kvm2_hap  &kvm3_hap  &kvm4_hap  &studio_unlock  &none    &to 0  &to 8  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none  &none  &none    &none  &none  &none  &none  &none  &none
-                     &none  &none  &none    &none  &none
-                            &none  &none    &none
+&kvm1_hap  &kvm2_hap  &kvm3_hap  &kvm4_hap  &studio_unlock  &none    &to 0  &to 8  &to 9  &none  &none  &none
+&none      &none      &none      &none      &none           &none    &none  &none  &none  &none  &none  &none
+&none      &none      &none      &none      &none           &none    &none  &none  &none  &none  &none  &none
+&none      &none      &none      &none      &none           &none    &none  &none  &none  &none  &none  &none
+                                 &none      &none           &none    &none  &none
+                                            &none           &none    &none
             >;
         };
 
@@ -310,6 +330,17 @@
 &kp LEFT_SHIFT  &kp Z   &kp X   &kp C         &kp V      &kp B            &kp N          &kp M      &kp COMMA  &kp DOT  &kp FSLH       &kp RIGHT_SHIFT
                                 &kp LEFT_WIN  &kp SPACE  &kp BACKSPACE    &kp ENTER      &kp SPACE
                                               &mo 3      &to 7            &kp BACKSPACE
+            >;
+        };
+
+        wow {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
+&trans  &trans  &trans  &kp W   &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
+&trans  &trans  &kp A   &kp S   &kp D   &trans    &trans  &mkp MB1  &mkp MB2  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans
+                                &trans  &trans    &trans
             >;
         };
     };
