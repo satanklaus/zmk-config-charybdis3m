@@ -220,6 +220,11 @@
             bindings = <&kp LC(LA(DELETE))>;
             key-positions = <32 33 34>;
         };
+
+        escape {
+            bindings = <&to 0>;
+            key-positions = <0 1>;
+        };
     };
 
     keymap {
