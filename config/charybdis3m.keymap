@@ -335,12 +335,12 @@
 
         wow {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans        &trans        &trans    &trans     &trans  &trans
-&trans  &trans  &trans  &kp W   &trans  &trans    &trans        &trans        &trans    &trans     &trans  &trans
-&trans  &trans  &kp A   &kp S   &kp D   &trans    &trans        &mkp MB1      &mkp MB2  &kp SPACE  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans        &trans        &trans    &trans     &trans  &trans
-                        &trans  &trans  &trans    &kp NUMBER_2  &kp NUMBER_1
-                                &trans  &trans    &kp NUMBER_3
+&trans  &trans  &trans     &trans  &trans     &trans          &trans        &trans        &trans    &trans    &trans     &trans
+&trans  &trans  &kp EQUAL  &kp W   &kp MINUS  &trans          &trans        &kp N         &kp P     &trans    &trans     &trans
+&trans  &trans  &kp A      &kp S   &kp D      &trans          &trans        &mkp MB1      &mkp MB2  &mkp MB2  &kp SPACE  &trans
+&trans  &trans  &trans     &trans  &trans     &trans          &trans        &kp M         &kp C     &kp B     &trans     &trans
+                           &trans  &trans     &kp NUMBER_0    &kp NUMBER_2  &kp NUMBER_1
+                                   &trans     &kp NUMBER_9    &kp NUMBER_3
             >;
         };
     };
